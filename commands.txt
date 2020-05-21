@@ -1,0 +1,69 @@
+//create database:
+
+CREATE DATABASE jobdb;
+
+//create tables
+
+create table users (
+    id serial not null unique primary key, 
+    name varchar,
+    email text unique not null,
+    joined timestamp unique not null
+);
+
+create table auth (
+    auth_id serial not null unique primary key, 
+    email text unique not null,
+    hash varchar not null,
+	id serial not null references users(id)  	
+);
+
+create table list (
+    list_id serial not null unique primary key, 
+    name varchar not null unique,
+    date_created timestamp not null,
+	id serial not null references users(id)  	
+);
+
+create table application (
+          app_id serial not null unique primary key, 
+          company_name varchar not null,
+	date_applied timestamp not null,
+	location varchar,
+	job_description text,
+	job_url text,
+	specific_requirements text,
+	comments text,
+	accepted boolean not null,
+	pending boolean not null,
+	rejected boolean not null,
+	list_id serial not null references list(list_id)  	
+);
+
+
+
+//insert to table
+INSERT into users(name, email, joined) 
+VALUES ('Anish', 'anish@gmail.com', current_timestamp);
+
+INSERT into auth(email, hash, id) 
+VALUES ('anish@gmail.com', 'saddddasdkjasdkja', 1);
+
+INSERT into list(name, date_created, id) 
+VALUES ('List1', current_timestamp, 1);
+
+INSERT into application(company_name, date_applied, location, job_description, job_url, specific_requirements, comments, accepted, pending, rejected, list_id) 
+VALUES ('Google', current_timestamp, 'Texas', 'SWE', 'https://google.com', 'Undergrad', 'start-date after 2months', true, false, false, 1);
+
+
+select * from users,auth, list, application where (users.id = auth.id AND auth.id = list.id); 
+
+
+//delete from table
+DELETE FROM users;
+
+//drop all tables
+drop table application;
+drop table list;
+drop table auth;
+drop table users;
