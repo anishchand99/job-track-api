@@ -27,7 +27,7 @@ const app = express();
 // );
 
 app.use(bodyParser.json());
-app.use(cors({origin: '*'}));
+app.use(cors());
 
 app.get('/', (req, res) => {
 	res.send('Hi');
@@ -43,7 +43,7 @@ app.post('/getList', (req, res) => {
   getList.handleGetList(req, res, db);
 });
 
-app.post('/addList', (req, res) => {
+app.post('/addList', cors(),(req, res) => {
   db('list')
     .insert({
       name: req.body.listName,
@@ -57,7 +57,7 @@ app.post('/addList', (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.post('/getRecords', (req, res) => {
+app.post('/getRecords', cors(), (req, res) => {
   db.from('list')
     .select('list_id')
     .where('name', '=', req.body.listToDisplay)
@@ -72,7 +72,7 @@ app.post('/getRecords', (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.post('/addRecords', (req, res) => {
+app.post('/addRecords', cors(),(req, res) => {
   const { row, listToDisplay } = req.body;
   db.from('list')
     .select('list_id')
@@ -100,7 +100,7 @@ app.post('/addRecords', (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.put('/updateRecords', (req, res) => {
+app.put('/updateRecords', cors(),(req, res) => {
   const { row, index, listToDisplay } = req.body;
   db.from('list')
     .select('list_id')
@@ -129,7 +129,7 @@ app.put('/updateRecords', (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.post('/deleteRecords', (req, res) => {
+app.post('/deleteRecords', cors(),(req, res) => {
   const { index, listToDisplay } = req.body;
   db.from('list')
     .select('list_id')
@@ -146,7 +146,7 @@ app.post('/deleteRecords', (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.put('/updateCredentials', (req, res) => {
+app.put('/updateCredentials',cors(), (req, res) => {
   const { id, name, password, new_password } = req.body;
   const saltRounds = 10;
   const salt = bcrypt.genSaltSync(saltRounds);
@@ -182,7 +182,7 @@ app.put('/updateCredentials', (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.post('/getGraphs', (req, res) => {
+app.post('/getGraphs', cors(),(req, res) => {
   const graphData = [];
   const { id } = req.body;
   db.raw(
