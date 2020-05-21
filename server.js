@@ -17,10 +17,6 @@ const getList = require('./controllers/getList');
 const signin = require('./controllers/signin');
 
 const app = express();
-if ('development' == app.get('env')) {
-    console.log("Rejecting node tls");
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-}
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 // app.use(
 //   '/graphql',
