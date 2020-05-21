@@ -5,6 +5,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const knex = require('knex');
+const register = require('./controllers/register');
+const getList = require('./controllers/getList');
+const signin = require('./controllers/signin');
+
 const db = knex({
   client: 'pg',
   connection: {
@@ -12,12 +16,8 @@ const db = knex({
     ssl: true,
   },
 });
-const register = require('./controllers/register');
-const getList = require('./controllers/getList');
-const signin = require('./controllers/signin');
-
-const app = express();
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+const app = express();
 // app.use(
 //   '/graphql',
 //   graphqlHTTP({
