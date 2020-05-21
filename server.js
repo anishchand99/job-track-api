@@ -5,6 +5,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const knex = require('knex');
+if ('development' == app.get('env')) {
+    console.log("Rejecting node tls");
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+}
 const db = knex({
   client: 'pg',
   connection: {
