@@ -1,5 +1,5 @@
 {
-  "name": "facedetect_backend",
+  "name": "job_track_backend",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
