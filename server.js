@@ -2,6 +2,7 @@ const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const schema = require('./schema/schema');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const knex = require('knex');
@@ -28,9 +29,10 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(morgan('combined'));
 
 app.get('/', (req, res) => {
-	res.send('Hi');
+	res.send('Hello World!!!');
 });
 app.post('/register', (req, res) => {
   register.handleRegister(req, res, db, bcrypt);
@@ -211,5 +213,5 @@ app.post('/getGraphs', cors(),(req, res) => {
 
 const PORT = process.env.PORT || 3005;
 app.listen(PORT, () => {
-  console.log(`listening on port ${PORT}`);
+  console.log(`Listening on port ${PORT}`);
 });

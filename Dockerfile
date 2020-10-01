@@ -2,7 +2,7 @@
 FROM node:14.11.0
 
 #make a working directory
-WORKDIR /usr/src/
+WORKDIR /usr/src/job-track-api
 
 #copy the files to the directory
 COPY . .
