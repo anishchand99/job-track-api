@@ -12,12 +12,15 @@ const signin = require('./controllers/signin');
 
 const db = knex({
   client: 'pg',
-  connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
-  },
+  connection: process.env.POSTGRES_URI
+  /*{
+    //for Heroku
+    // connectionString: process.env.DATABASE_URL,
+    // ssl: true,
+  }*/,
 });
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+//for Heroku
+//process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 const app = express();
 // app.use(
 //   '/graphql',

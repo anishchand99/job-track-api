@@ -4,42 +4,42 @@ CREATE DATABASE jobdb;
 
 //create tables
 
-create table users (
-    id serial not null unique primary key, 
-    name varchar,
-    email text unique not null,
-    joined timestamp unique not null
+CREATE TABLE users (
+    id serial NOT NULL UNIQUE PRIMARY KEY,
+    name varchar(100),
+    email varchar(100) UNIQUE NOT NULL,
+    joined timestamp UNIQUE NOT NULL
 );
 
-create table auth (
-    auth_id serial not null unique primary key, 
-    email text unique not null,
-    hash varchar not null,
-	id serial not null references users(id)  	
+CREATE TABLE auth (
+  auth_id serial NOT NULL UNIQUE PRIMARY KEY,
+  email varchar(100) UNIQUE NOT NULL,
+  hash varchar(100) NOT NULL,
+  id serial NOT NULL REFERENCES users(id)
 );
 
-create table list (
-    list_id serial not null unique primary key, 
-    name varchar not null unique,
-    date_created timestamp not null,
-	id serial not null references users(id)  	
+
+CREATE TABLE list (
+    list_id serial NOT NULL UNIQUE PRIMARY KEY,
+    name varchar(100) NOT NULL UNIQUE,
+    date_created timestamp NOT NULL,
+	  id serial NOT NULL REFERENCES users(id)
 );
 
-create table application (
-          app_id serial not null unique primary key, 
-          company_name varchar not null,
-	date_applied timestamp not null,
+CREATE TABLE application (
+  app_id serial NOT NULL UNIQUE PRIMARY KEY,
+  company_name varchar NOT NULL,
+	date_applied timestamp NOT NULL,
 	location varchar,
 	job_description text,
 	job_url text,
 	specific_requirements text,
 	comments text,
-	accepted boolean not null,
-	pending boolean not null,
-	rejected boolean not null,
-	list_id serial not null references list(list_id)  	
+	accepted boolean NOT NULL,
+	pending boolean NOT NULL,
+	rejected boolean NOT NULL,
+	list_id serial NOT NULL REFERENCES list(list_id)
 );
-
 
 
 //insert to table

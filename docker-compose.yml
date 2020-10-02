@@ -6,7 +6,21 @@ services:
     build: ./
     command: npm start
     working_dir: /usr/src/job-track-api
-    #volumes:
+    environment:
+      POSTGRES_URI : postgres://user:password@postgres:5432/job-track-db-docker
+    links:
+      - postgres
+    #for hot reload nodemon->#volumes:
     #  - ./:/usr/src/job-track-api
     ports:
       - "3005:3005"
+
+  postgres:
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: job-track-db-docker
+      POSTGRES_HOST: postgres
+    build: ./postgres
+    ports:
+      - "5432:5432"
