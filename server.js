@@ -35,7 +35,7 @@ app.use(cors());
 app.use(morgan('combined'));
 
 app.get('/', (req, res) => {
-	res.send('Successfully Changed Nodemon!!!');
+	res.send('Nodemon Working!!!');
 });
 app.post('/register', (req, res) => {
   register.handleRegister(req, res, db, bcrypt);
