@@ -1,0 +1,42 @@
+//list containers
+sudo docker ps -a
+
+//docker usage stats
+sudo docker system df
+
+//list images
+sudo docker images
+
+//build the Dockerfile followed by the period '.'
+sudo docker build -t tagName .
+
+//run the docker image by publilshing the port
+sudo docker run -it -p externalPort:containerPort imageName
+
+//remove all the stopped containers
+sudo docker container prune 
+
+//remove the image with the given imageId
+sudo docker rmi <imageId> 
+
+//stop a container
+sudo docker stop <containerId> 
+
+//kill container
+sudo docker kill <containerId>
+
+//remove container
+sudo docker rm <containerId>
+
+//docker-compose
+sudo docker-compose up --build
+
+//build docker-compose.yml file
+sudo docker-compose build
+
+//remove all unused images
+sudo docker image prune -a
+
+//open bash inside a running container
+sudo docker exec -it "id" bash
+
